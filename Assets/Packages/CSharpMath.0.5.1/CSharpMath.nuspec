@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>CSharpMath</id>
+    <version>0.5.1</version>
+    <title>CSharpMath</title>
+    <authors>CSharpMath Contributors (verybadcat, Happypig375, charlesroddie, FoggyFinder)</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>Icon.png</icon>
+    <projectUrl>https://github.com/verybadcat/CSharpMath</projectUrl>
+    <description>The core of the C# math rendering engine - CSharpMath.
+      Can display beautiful math equations and symbols from the LaTeX format.
+      Needs a front end to function.
+      Currently, front ends exist for Avalonia, iOS, SkiaSharp and Xamarin.Forms.</description>
+    <releaseNotes># 0.5.1 Evaluation Update Quickfix
+
+## Changes from v0.5.0 (Recently merged first)
+## 🚀 Features
+
+&lt;details&gt;&lt;summary&gt;Provide workaround for #192 (#193) @Happypig375&lt;/summary&gt;&lt;table&gt;&lt;td&gt;
+
+So that
+```cs
+class RussianBreakingEngine : Typography.TextBreak.EngBreakingEngine {
+  public override bool CanHandle(char c) =&gt; c is &gt;= '\u0400' and &lt;= '\u052f'; // Unicode Cyrillic and Cyrillic Supplement
+}
+CSharpMath.Rendering.Text.TextLaTeXParser.AdditionalBreakingEngines.Add(new RussianBreakingEngine());
+```
+can be used for #192 while awaiting Typography support.
+&lt;/td&gt;&lt;/table&gt;&lt;/details&gt;
+
+## Contributors
+@Happypig375</releaseNotes>
+    <copyright>© CSharpMath Contributors 2020</copyright>
+    <tags>math mathematics mathematical formula equation equations
+      expression tex latex render rendering display beautiful CSharpMath</tags>
+    <repository type="git" url="https://github.com/verybadcat/CSharpMath.git" branch="master" commit="69fb790c40693ae85d2d8679655ee04e88f35aea" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Memory" version="4.5.4" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.CompilerServices.Unsafe" version="4.6.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
