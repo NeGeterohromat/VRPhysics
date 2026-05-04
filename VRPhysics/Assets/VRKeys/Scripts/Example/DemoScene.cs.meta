@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7db0a10c5cf3a6b44b04ab1f97828fb2
+timeCreated: 1498758584
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scripts/Example/DemoScene.cs
+  uploadId: 316786

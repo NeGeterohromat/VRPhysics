@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6e0dbad9ea3028d4db446557163e247c
+timeCreated: 1499973503
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scripts/LayoutList.cs
+  uploadId: 316786

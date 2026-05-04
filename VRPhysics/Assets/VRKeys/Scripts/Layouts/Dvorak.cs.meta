@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c8f6a855f8d9fb14b8a1a22e77dd95e0
+timeCreated: 1501266987
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scripts/Layouts/Dvorak.cs
+  uploadId: 316786
