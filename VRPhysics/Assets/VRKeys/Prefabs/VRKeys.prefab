@@ -3896,17 +3896,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9094873793226793165}
-        m_TargetAssemblyTypeName: KeyboardActivator, Assembly-CSharp
-        m_MethodName: Activate
-        m_Mode: 1
+      - m_Target: {fileID: 1000011759236714}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &2978645332055438829
 GameObject:
@@ -5879,9 +5879,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4972901012066484136, guid: f9e0c9cee361bad4bbe0e19b0df0efc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4022274239141158567}
-    - targetCorrespondingSourceObject: {fileID: 4972901010539698924, guid: f9e0c9cee361bad4bbe0e19b0df0efc5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9094873793226793165}
   m_SourcePrefab: {fileID: 100100000, guid: f9e0c9cee361bad4bbe0e19b0df0efc5, type: 3}
 --- !u!1 &1000010145710606 stripped
 GameObject:
@@ -5907,24 +5904,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!1 &1000011907245898 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4972901010539698924, guid: f9e0c9cee361bad4bbe0e19b0df0efc5, type: 3}
-  m_PrefabInstance: {fileID: 4972192372519009702}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9094873793226793165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000011907245898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795abf3273e8e9043aaad015b8f3c579, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeyboardActivator
-  KeyboardObject: {fileID: 1000011759236714}
 --- !u!1 &1000012078599230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4972901010102137240, guid: f9e0c9cee361bad4bbe0e19b0df0efc5, type: 3}
