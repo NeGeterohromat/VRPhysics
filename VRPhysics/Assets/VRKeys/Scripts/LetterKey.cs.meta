@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 20da633ea6ddf744bb835e49bbf6b2d3
+timeCreated: 1498683586
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scripts/LetterKey.cs
+  uploadId: 316786

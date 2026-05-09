@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a34a374857facec4b8beb240f59fbe4f
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scenes/Example Scene.unity
+  uploadId: 316786

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 430d22df5b1cdfa4889efd982f71d030
+timeCreated: 1499116725
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Fonts/RobotoMono-Regular SDF.asset
+  uploadId: 316786

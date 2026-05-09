@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: ae39fdb11b3bc8848bec2576ceaad917
+timeCreated: 1498685793
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Scripts/Mallet.cs
+  uploadId: 316786

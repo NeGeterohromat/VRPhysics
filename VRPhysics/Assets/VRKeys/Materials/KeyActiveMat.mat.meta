@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 157abfb689445624c97d685110ed6172
+timeCreated: 1498683446
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/Materials/KeyActiveMat.mat
+  uploadId: 316786

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 65203e80f9522be4abebef33c7859669
+timeCreated: 1498783630
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 99222
+  packageName: VRKeys
+  packageVersion: 0.8.2
+  assetPath: Assets/VRKeys/README.md
+  uploadId: 316786
