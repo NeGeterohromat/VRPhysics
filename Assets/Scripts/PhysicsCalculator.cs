@@ -1,57 +1,67 @@
-using System;
+using TMPro;
 using UnityEngine;
+using System;
+using MathNet.Numerics.Distributions;
+using VRKeys;
 
 public class PhysicsCalculator : MonoBehaviour
 {
-    [Header("œ‡‡ÏÂÚ˚ ÛÒÚ‡ÌÓ‚ÍË (ËÁ ÏÂÚÓ‰Ë˜ÍË)")]
-    public double Ua = 5.0;        // ¬
-    public double Ra_mm = 2.50;    // ÏÏ
-    public double L_mm = 50.0;     // ÏÏ
-    public double D_mm = 40.0;     // ÏÏ
-    public int N = 512;            // ‚ËÚÍÓ‚
+    [SerializeField] private TextMeshProUGUI output;
+    [SerializeField] private Keyboard keyboard;
 
-    [Header("›ÏÔËË˜ÂÒÍËÂ ÍÓ˝ÙÙËˆËÂÌÚ˚")]
-    public double realisticCoef = 100.0;   // ”ÏÂÌ¸¯ÂÌËÂ Ï‡ÍÒ. ÚÓÍ‡ ‰Ó Â‡Î¸Ì˚ı ~150 ÏÍ¿
-    public double steepness = 0.04;        //  ÛÚËÁÌ‡ Ô‡‰ÂÌËˇ
+    //–ø–∞—Ä–∞–º–µ—Ç—Ä—ã —Å–∞–º–æ–π —É—Å—Ç–∞–Ω–æ–≤–∫–∏.
+    public double UaVolts = 6;
+    public double RaMilliMetres = 2.5;
+    public double LMilliMetres = 50;
+    public double DMilliMetres = 40;
+    public double N = 490;
 
-    // ‘ËÁË˜ÂÒÍËÂ ÍÓÌÒÚ‡ÌÚ˚
-    private const double eps0 = 8.854e-12;
-    private const double e = 1.602e-19;
-    private const double m = 9.109e-31;
-    private const double mu0 = 4 * Math.PI * 1e-7;
+    //—Ñ–∏–∑–∏—á–µ—Å–∫–∏–µ –∫–æ–Ω—Å—Ç–∞–Ω—Ç—ã. _n –≤ –∏–º–µ–Ω–∏ –æ–∑–Ω–∞—á–∞–µ—Ç —É–º–Ω–æ–∂–µ–Ω–∏–µ –Ω–∞ 10^(-n)
+    private const double e_19 = 1.602;
+    private const double me_31 = 9.109;
+    private const double eps0_12 = 8.854;
+    private const double mu0_7 = Math.PI * 4;
 
-    private double Ia_max;   // ÏÍ¿
-    private double I_crit;   // ¿
+    //—Å —Ç–æ—á–∫–∏ –∑—Ä–µ–Ω–∏—è —Ñ–æ—Ä–º—É–ª –≤—Å—ë –≤–µ—Ä–Ω–æ, –Ω–æ, –≤–∏–¥–∏–º–æ, –∏–∑-–∑–∞ –∫–æ–Ω—Å—Ç—Ä—É–∫—Ü–∏–∏ —É—Å—Ç–∞–Ω–æ–≤–∫–∏ —Ä–µ–∞–ª—å–Ω—ã–π –∞–Ω–æ–¥–Ω—ã–π —Ç–æ–∫ Ia —Å–∏–ª—å–Ω–æ –Ω–∏–∂–µ —Ä–∞—Å—Å—á—ë—Ç–Ω–æ–≥–æ. 
+    private const double realisticCoef = 15;
 
-    void Start()
+    //–ø–∞—Ä–∞–º–µ—Ç—Ä—ã –ø–ª–∞–≤–Ω–æ–≥–æ –ø–∞–¥–µ–Ω–∏—è Ia –¥–ª—è —É—Å—Ç–∞–Ω–æ–≤–∫–∏
+    private double Ia_maksimalnoe_mikroAmpery;
+    private double mu_Ikr;
+    private const double sigma = 0.04;
+
+    private void Start()
     {
-        double Ra = Ra_mm * 1e-3;
-        double L = L_mm * 1e-3;
-        double D = D_mm * 1e-3;
-
-        double sqrt2em = Mathf.Sqrt((float)(2 * e / m));
-        double Ia_max_amps = (4 * Mathf.PI * eps0 / 9.0) *
-                             sqrt2em *
-                             L *
-                             Mathf.Pow((float)Ua, 1.5f) /
-                             Ra;
-        Ia_max = Ia_max_amps / realisticCoef;
-
-        double e_over_m = e / m;
-        double numerator = Mathf.Sqrt((float)(8 * Ua * (L * L + D * D) / e_over_m));
-        double denominator = Ra * mu0 * N;
-        I_crit = numerator / denominator;
-
-        Debug.Log($"PhysicsCalculator: Ia_max = {Ia_max} µA, I_crit = {I_crit} A");
+        keyboard.OnSubmit.AddListener((s) => CalculateIaByInput());
     }
 
-    public double CalculateIa(double Ic)
+    [ContextMenu("üîÑ Render Physics Now")]
+    public void CalculateIaByInput()
     {
-        double Ia = Ia_max / (1.0 + Mathf.Exp((float)((Ic - I_crit) / steepness)));
+        try
+        {
+            double inp = double.Parse(keyboard.text);
+            var Ia = CalculateIa(inp);
+            output.text = Ia.ToString();// + " " + Ia_maksimalnoe_mikroAmpery + " " + mu_Ikr;
+        }
+        catch (Exception e)
+        {
+            output.text = $"Error in input: {e}";
+        }
+    }
 
-        Debug.Log($"CalculateIa: Ic={Ic}, Ia={Ia} µA");
+    public double CalculateIa(double inp)
+    {
+        //–∑–∞–∫–æ–Ω –õ–µ–Ω–≥–º—é—Ä–∞-–ß–∞–π–ª–¥–∞
+        Ia_maksimalnoe_mikroAmpery = 4 * Math.PI * eps0_12 / 9
+            * Math.Sqrt(2 * e_19 / me_31)
+            * LMilliMetres * Math.Pow(UaVolts, 3d / 2) / RaMilliMetres
+            / realisticCoef;
 
-        return Ia;
+        //I –∫—Ä–∏—Ç–∏—á–µ—Å–∫–æ–µ –ø–æ —Ñ–æ—Ä–º—É–ª–µ (9) (-31-3-3+19+3+3+7+7)/2 = 1 => –æ—Å—Ç–∞—ë—Ç—Å—è –¥–æ–º–Ω–æ–∂–∏—Ç—å –Ω–∞ 10^1;
+        mu_Ikr = Math.Sqrt(me_31 * 8 * UaVolts * (LMilliMetres * LMilliMetres + DMilliMetres * DMilliMetres)
+            / e_19 / RaMilliMetres / RaMilliMetres / mu0_7 / mu0_7 / N / N) * 10;
 
+        return Ia_maksimalnoe_mikroAmpery * (1 - Laplace.CDF(mu_Ikr, sigma, inp));
     }
 }
