@@ -50,7 +50,11 @@ public class PhysicsCalculator : MonoBehaviour
         }
     }
 
-    public double CalculateIa(double inp)
+    public double CalculateIa(double inp) =>
+        CalculateIa(inp, UaVolts, RaMilliMetres, LMilliMetres, DMilliMetres, N);
+
+    public double CalculateIa(double inp, double UaVolts, double RaMilliMetres, double LMilliMetres,
+        double DMilliMetres, double N)
     {
         //закон Ленгмюра-Чайлда
         Ia_maksimalnoe_mikroAmpery = 4 * Math.PI * eps0_12 / 9
@@ -58,10 +62,17 @@ public class PhysicsCalculator : MonoBehaviour
             * LMilliMetres * Math.Pow(UaVolts, 3d / 2) / RaMilliMetres
             / realisticCoef;
 
-        //I критическое по формуле (9) (-31-3-3+19+3+3+7+7)/2 = 1 => остаётся домножить на 10^1;
-        mu_Ikr = Math.Sqrt(me_31 * 8 * UaVolts * (LMilliMetres * LMilliMetres + DMilliMetres * DMilliMetres)
-            / e_19 / RaMilliMetres / RaMilliMetres / mu0_7 / mu0_7 / N / N) * 10;
+        mu_Ikr = GetIkr();
 
         return Ia_maksimalnoe_mikroAmpery * (1 - Laplace.CDF(mu_Ikr, sigma, inp));
     }
+
+    public double GetIkr() => GetIkr(UaVolts, RaMilliMetres, LMilliMetres, DMilliMetres, N);
+
+    //I критическое по формуле (9) (-31-3-3+19+3+3+7+7)/2 = 1 => остаётся домножить на 10^1;
+    public double GetIkr(double UaVolts, double RaMilliMetres, double LMilliMetres,
+        double DMilliMetres, double N) =>
+        Math.Sqrt(me_31 * 8 * UaVolts * (LMilliMetres * LMilliMetres + DMilliMetres * DMilliMetres)
+            / e_19 / RaMilliMetres / RaMilliMetres / mu0_7 / mu0_7 / N / N) * 10;
+
 }
