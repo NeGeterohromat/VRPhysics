@@ -6,12 +6,12 @@ public class ToggleSwitch : MonoBehaviour
     public bool isOn = false;
     public UnityEvent onToggleOn;
     public UnityEvent onToggleOff;
-    public GameObject switchHandle;   // модель ручки (для анимации)
+    public GameObject switchHandle;   // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 
     void OnMouseDown()
     {
         isOn = !isOn;
-        // Анимация положения ручки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (switchHandle != null)
             switchHandle.transform.localEulerAngles = isOn ? new Vector3(0, 0, -30) : Vector3.zero;
 

@@ -8,6 +8,14 @@ public class MagnetronExperiment : MonoBehaviour
 
     public Multimeter ammeter;      // левый мультиметр (амперметр)
     public Multimeter microAmmeter; // правый мультиметр (микроамперметр)
+
+    public ExperimentData experimentData;   // перетащить в инспекторе
+    public ExcelExporter exporter;
+
+    // Храним текущие показания (только для записи)
+    private double currentIc;
+    private double currentIa;
+
     public bool powerSolenoidOn = false;
     public bool powerAnodeOn = false;
 
@@ -22,10 +30,10 @@ public class MagnetronExperiment : MonoBehaviour
         // Пример: левый мультиметр (амперметр) включается последовательно с соленоидом
         expectedConnections["SolenoidA"] = "Ammeter10A";
         expectedConnections["AmmeterCOM"] = "PowerSupplySolenoidNeg";
-        expectedConnections["PowerSupplySolenoidPos"] = "SolenoidB";
+        expectedConnections["PowerSupplySolenoidPos"] = "DiodeAnode";
 
         // Анодная цепь: анод лампы -> микроамперметр -> плюс анодного питания
-        expectedConnections["DiodeAnode"] = "MicroAmmeterCOM";   // микроамперметр включается в разрыв анодной цепи
+        expectedConnections["SolenoidB"] = "MicroAmmeterCOM";   // микроамперметр включается в разрыв анодной цепи
         expectedConnections["MicroAmmetermA"] = "AnodeSupplyPos";
         expectedConnections["AnodeSupplyNeg"] = "DiodeCathode";
 
@@ -96,6 +104,8 @@ public class MagnetronExperiment : MonoBehaviour
 
     public void SetSolenoidCurrent(double ic)
     {
+        currentIc = ic;
+
         Debug.Log($"SetSolenoidCurrent called with ic = {ic}");
 
         if (!powerSolenoidOn || !powerAnodeOn)
@@ -110,6 +120,8 @@ public class MagnetronExperiment : MonoBehaviour
         // Рассчитать анодный ток через PhysicsCalculator
         double ia = calculator.CalculateIa(ic);
 
+        currentIa = ia;
+
         // Отладочные логи (теперь ia уже определена)
         Debug.Log($"ammeter = {(ammeter == null ? "NULL" : "OK")}");
         Debug.Log($"microAmmeter = {(microAmmeter == null ? "NULL" : "OK")}");
@@ -118,5 +130,21 @@ public class MagnetronExperiment : MonoBehaviour
 
         // Отобразить на микроамперметре
         if (microAmmeter != null) microAmmeter.SetCurrent(ia);
+    }
+
+    public void RecordCurrentMeasurement()
+    {
+        if (experimentData == null)
+        {
+            Debug.LogWarning("ExperimentData не назначен!");
+            return;
+        }
+        experimentData.AddMeasurement(currentIc, currentIa);
+    }
+
+    public void ExportToExcel()
+    {
+        if (exporter == null || experimentData == null) return;
+        exporter.ExportToCSV(experimentData.measurements);
     }
 }
