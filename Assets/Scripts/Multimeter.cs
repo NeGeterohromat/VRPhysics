@@ -19,11 +19,11 @@ public class Multimeter : MonoBehaviour
         float displayValue;
         if (isMicroAmmeter)
         {
-            displayValue = (float)(currentAmps * 1e6); // � ������������
+            displayValue = (float)(currentAmps); // � ������������
             float t = displayValue / 200f;             // ����� �� 200 ���
             needle.localEulerAngles = new Vector3(0, 0, -t * maxAngle);
             if (digitalDisplay != null)
-                digitalDisplay.text = $"{displayValue:F1} �A";
+                digitalDisplay.text = $"{displayValue:F3} μA";
         }
         else
         {

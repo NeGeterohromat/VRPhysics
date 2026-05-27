@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class ToggleSwitch : MonoBehaviour
 {
@@ -7,8 +8,26 @@ public class ToggleSwitch : MonoBehaviour
     public UnityEvent onToggleOn;
     public UnityEvent onToggleOff;
     public GameObject switchHandle;   // ������ ����� (��� ��������)
+    private Button button;
+
+    private void Start()
+    {
+        button = GetComponentInChildren<Button>();
+        if (!(button is null))
+        {
+            button.onClick.AddListener(() =>
+            {
+                Toggle();
+            });
+        }
+    }
 
     void OnMouseDown()
+    {
+        Toggle();
+    }
+
+    private void Toggle()
     {
         isOn = !isOn;
         // �������� ��������� �����

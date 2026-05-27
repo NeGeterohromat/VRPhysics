@@ -16,7 +16,6 @@ public class WireConnector : MonoBehaviour
         button = GetComponentInChildren<Button>();
         if (!(button is null))
         {
-            print("bbb");
             button.onClick.AddListener(() => 
             {
                 if (experiment != null)
