@@ -1,15 +1,33 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WireConnector : MonoBehaviour
 {
     public string socketId;          // ���������� ������������� ������
     public bool isConnected = false;
     private GameObject wire;
+    private Button button;
+    private MagnetronExperiment experiment;
+
+    private void Start()
+    {
+        experiment = FindObjectOfType<MagnetronExperiment>();
+        button = GetComponentInChildren<Button>();
+        if (!(button is null))
+        {
+            print("bbb");
+            button.onClick.AddListener(() => 
+            {
+                if (experiment != null)
+                    experiment.HandleSocketClick(this);
+            });
+        }
+    }
 
     void OnMouseDown()
     {
         Debug.Log("sss");
-        MagnetronExperiment experiment = FindObjectOfType<MagnetronExperiment>();
         if (experiment != null)
             experiment.HandleSocketClick(this);
     }
