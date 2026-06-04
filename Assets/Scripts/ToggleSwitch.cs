@@ -1,17 +1,36 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class ToggleSwitch : MonoBehaviour
 {
     public bool isOn = false;
     public UnityEvent onToggleOn;
     public UnityEvent onToggleOff;
-    public GameObject switchHandle;   // модель ручки (для анимации)
+    public GameObject switchHandle;   // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+    private Button button;
+
+    private void Start()
+    {
+        button = GetComponentInChildren<Button>();
+        if (!(button is null))
+        {
+            button.onClick.AddListener(() =>
+            {
+                Toggle();
+            });
+        }
+    }
 
     void OnMouseDown()
     {
+        Toggle();
+    }
+
+    private void Toggle()
+    {
         isOn = !isOn;
-        // Анимация положения ручки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (switchHandle != null)
             switchHandle.transform.localEulerAngles = isOn ? new Vector3(0, 0, -30) : Vector3.zero;
 

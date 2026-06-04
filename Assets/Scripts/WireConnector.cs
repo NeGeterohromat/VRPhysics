@@ -1,22 +1,40 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WireConnector : MonoBehaviour
 {
-    public string socketId;          // Уникальный идентификатор гнезда
+    public string socketId;          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public bool isConnected = false;
     private GameObject wire;
+    private Button button;
+    private MagnetronExperiment experiment;
+
+    private void Start()
+    {
+        experiment = FindObjectOfType<MagnetronExperiment>();
+        button = GetComponentInChildren<Button>();
+        if (!(button is null))
+        {
+            button.onClick.AddListener(() => 
+            {
+                if (experiment != null)
+                    experiment.HandleSocketClick(this);
+            });
+        }
+    }
 
     void OnMouseDown()
     {
-        MagnetronExperiment experiment = FindObjectOfType<MagnetronExperiment>();
+        Debug.Log("sss");
         if (experiment != null)
             experiment.HandleSocketClick(this);
     }
 
     public void CreateWire(GameObject targetSocket)
     {
-        // Создать визуальный проводник между текущим гнездом и targetSocket
-        // Можно использовать LineRenderer или готовую префабу провода
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ targetSocket
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LineRenderer пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         wire = new GameObject("Wire");
         LineRenderer lr = wire.AddComponent<LineRenderer>();
         lr.positionCount = 2;
