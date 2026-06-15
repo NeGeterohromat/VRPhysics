@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class MagnetronExperiment : MonoBehaviour
 {
+    [SerializeField] private ModelMeasurementsData measurementsData;
+
     private WireConnector selectedSocket = null;
     private Dictionary<string, string> expectedConnections = new Dictionary<string, string>();
 
@@ -130,6 +132,8 @@ public class MagnetronExperiment : MonoBehaviour
 
         // Отобразить на микроамперметре
         if (microAmmeter != null) microAmmeter.SetCurrent(ia);
+
+        measurementsData.AddMeasurement(currentIc, currentIa);
     }
 
     public void RecordCurrentMeasurement()
