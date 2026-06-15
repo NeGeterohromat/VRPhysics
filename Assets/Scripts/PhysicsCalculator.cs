@@ -40,6 +40,10 @@ public class PhysicsCalculator : MonoBehaviour
         RaMilliMetres = Random.Range(18, 32) / 10f;
         LMilliMetres = Random.Range(40, 60);
         DMilliMetres = Random.Range(30, 50);
+        while (LMilliMetres <= DMilliMetres)
+        {
+            DMilliMetres = Random.Range(30, 50);
+        }
         N = Random.Range(480, 540);
         measurementsData.ViewModelParameters(UaVolts, RaMilliMetres, LMilliMetres, DMilliMetres, N);
     }
