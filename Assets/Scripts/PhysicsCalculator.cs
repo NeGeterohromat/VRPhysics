@@ -36,11 +36,11 @@ public class PhysicsCalculator : MonoBehaviour
     {
         keyboard?.OnSubmit.AddListener((s) => CalculateIaByInput());
         //Стартовые параметры
-        UaVolts = Random.Range(40, 70) / 10f;
-        RaMilliMetres = Random.Range(10, 50) / 10f;
+        UaVolts = Random.Range(40, 65) / 10f;
+        RaMilliMetres = Random.Range(18, 32) / 10f;
         LMilliMetres = Random.Range(40, 60);
         DMilliMetres = Random.Range(30, 50);
-        N = Random.Range(430, 580);
+        N = Random.Range(480, 540);
         measurementsData.ViewModelParameters(UaVolts, RaMilliMetres, LMilliMetres, DMilliMetres, N);
     }
 
