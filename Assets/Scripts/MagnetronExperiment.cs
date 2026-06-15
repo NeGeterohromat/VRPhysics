@@ -23,21 +23,22 @@ public class MagnetronExperiment : MonoBehaviour
 
     private PhysicsCalculator calculator; // ваш старый скрипт (адаптированный)
 
+    private int connectionsCount = 0;
+
     public void SetSolenoidPower(bool on) { powerSolenoidOn = on; }
     public void SetAnodePower(bool on) { powerAnodeOn = on; }
 
     // Схема правильных соединений (согласно вашему скриншоту)
     void Start()
-    {
-        // Пример: левый мультиметр (амперметр) включается последовательно с соленоидом
-        expectedConnections["SolenoidA"] = "Ammeter10A";
-        expectedConnections["AmmeterCOM"] = "PowerSupplySolenoidNeg";
-        expectedConnections["PowerSupplySolenoidPos"] = "DiodeAnode";
-
-        // Анодная цепь: анод лампы -> микроамперметр -> плюс анодного питания
-        expectedConnections["SolenoidB"] = "MicroAmmeterCOM";   // микроамперметр включается в разрыв анодной цепи
-        expectedConnections["MicroAmmetermA"] = "AnodeSupplyPos";
-        expectedConnections["AnodeSupplyNeg"] = "DiodeCathode";
+    { 
+        expectedConnections["SolenoidPowerP"] = "AmpermetrV";
+        expectedConnections["AmpermetrCOM"] = "SolenoidP";
+        expectedConnections["SolenoidN"] = "SolenoidPowerN";
+        expectedConnections["LampPowerP"] = "MicroAmpermetrV";
+        expectedConnections["MicroAmpermetrCOM"] = "Anod";
+        expectedConnections["Katod"] = "LampPowerN";
+        expectedConnections["LampPower2P"] = "HeatingP";
+        expectedConnections["LampPower2N"] = "HeatingN";
 
         calculator = GetComponent<PhysicsCalculator>();
 
@@ -72,6 +73,7 @@ public class MagnetronExperiment : MonoBehaviour
                 selectedSocket.CreateWire(socket.gameObject);
                 selectedSocket.isConnected = true;
                 socket.isConnected = true;
+                connectionsCount++;
                 Debug.Log($"Проводник создан между {selectedSocket.socketId} и {socket.socketId}");
             }
             else
@@ -113,6 +115,12 @@ public class MagnetronExperiment : MonoBehaviour
         if (!powerSolenoidOn || !powerAnodeOn)
         {
             Debug.Log("Питание не включено!");
+            return;
+        }
+
+        if (connectionsCount != 8)
+        {
+            Debug.Log("Не всё соединено!");
             return;
         }
 
