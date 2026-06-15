@@ -9,16 +9,22 @@ public class ToggleSwitch : MonoBehaviour
     public UnityEvent onToggleOff;
     public GameObject switchHandle;   // ������ ����� (��� ��������)
     private Button button;
+    private GameObject onIndicator;
 
     private void Start()
     {
         button = GetComponentInChildren<Button>();
+        onIndicator = transform.Find("Indicator").gameObject;
         if (!(button is null))
         {
             button.onClick.AddListener(() =>
             {
                 Toggle();
             });
+        }
+        if (!(onIndicator is null))
+        {
+            onIndicator.SetActive(isOn);
         }
     }
 
@@ -36,5 +42,7 @@ public class ToggleSwitch : MonoBehaviour
 
         if (isOn) onToggleOn.Invoke();
         else onToggleOff.Invoke();
+
+        onIndicator.SetActive(isOn);
     }
 }

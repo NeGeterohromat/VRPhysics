@@ -3,11 +3,13 @@ using UnityEngine;
 using System;
 using MathNet.Numerics.Distributions;
 using VRKeys;
+using Random = UnityEngine.Random;
 
 public class PhysicsCalculator : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI output;
     [SerializeField] private Keyboard keyboard;
+    [SerializeField] private ModelMeasurementsData measurementsData;
 
     //параметры самой установки.
     public double UaVolts = 6;
@@ -32,7 +34,14 @@ public class PhysicsCalculator : MonoBehaviour
 
     private void Start()
     {
-        keyboard.OnSubmit.AddListener((s) => CalculateIaByInput());
+        keyboard?.OnSubmit.AddListener((s) => CalculateIaByInput());
+        //Стартовые параметры
+        UaVolts = Random.Range(40, 65) / 10f;
+        RaMilliMetres = Random.Range(18, 32) / 10f;
+        LMilliMetres = Random.Range(40, 60);
+        DMilliMetres = Random.Range(30, 50);
+        N = Random.Range(480, 540);
+        measurementsData.ViewModelParameters(UaVolts, RaMilliMetres, LMilliMetres, DMilliMetres, N);
     }
 
     [ContextMenu("🔄 Render Physics Now")]
